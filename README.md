@@ -1,2 +1,3 @@
-# AccountingApp
-A Multi-User AccountingApp to manage your accounting stuff...
+# Bookkeeper REST API
+
+This repository contains the REST API for our multi-user bookkeeping application.
