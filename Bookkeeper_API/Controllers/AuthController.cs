@@ -15,13 +15,13 @@ namespace Bookkeeper_API.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult Register(UserDto request)
         {
             throw new NotImplementedException();
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login(UserDto request)
         {
             throw new NotImplementedException();
