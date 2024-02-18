@@ -1,4 +1,4 @@
-﻿namespace Bookkeeper_API.Data
+﻿namespace Bookkeeper_API.Data.DTOs
 {
     public class BalanceSheetDto
     {

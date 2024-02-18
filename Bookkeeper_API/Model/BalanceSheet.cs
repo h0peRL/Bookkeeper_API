@@ -1,4 +1,4 @@
-﻿using Bookkeeper_API.Data;
+﻿using Bookkeeper_API.Data.DTOs;
 
 namespace Bookkeeper_API.Model
 {
