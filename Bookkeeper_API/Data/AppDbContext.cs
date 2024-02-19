@@ -32,7 +32,7 @@ namespace Bookkeeper_API.Data
                 .Property(u => u.Role)
                 .HasConversion(
                     v => JsonConvert.SerializeObject(v), // Convert IUserRoleState to JSON string
-                    v => JsonConvert.DeserializeObject<IUserRoleState>(v) !); // Convert JSON string back to IUserRoleState
+                    v => JsonConvert.DeserializeObject<IUserRoleState>(v)); // Convert JSON string back to IUserRoleState
 
             modelBuilder.Entity<BookingRecord>()
                 .Property(b => b.Amount)
