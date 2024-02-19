@@ -59,13 +59,13 @@ namespace Bookkeeper_API.Migrations
                         column: x => x.CreditAccountId,
                         principalTable: "Account",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Bookings_Account_DebitAccountId",
                         column: x => x.DebitAccountId,
                         principalTable: "Account",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
