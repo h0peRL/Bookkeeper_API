@@ -2,7 +2,7 @@
 {
     public class User
     {
-        private int? _id;
+        private readonly int _id;
         private string _username;
         private string _passwordHash;
         private IUserRoleState _role;

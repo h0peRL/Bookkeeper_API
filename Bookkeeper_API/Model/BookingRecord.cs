@@ -2,7 +2,7 @@
 {
     public class BookingRecord
     {
-        private int? _id;
+        private readonly int _id;
         private string? _bookingNote;
         private int _bookingDate;
         private Account _debitAccount;

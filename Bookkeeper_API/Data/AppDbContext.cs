@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bookkeeper_API.Model;
+using Bookkeeper_API.Model.UserManagement;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookkeeper_API.Data
 {
@@ -8,5 +10,11 @@ namespace Bookkeeper_API.Data
             : base(options)
         {
         }
+
+        public DbSet<Account> Accounts { get; set; }
+
+        public DbSet<BookingRecord> Bookings { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }
