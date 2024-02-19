@@ -428,3 +428,4 @@ FodyWeavers.xsd
 
 # Appsettings with confidential data
 /Bookkeeper_API/appsettings.json
+/Bookkeeper_API/appsettings.Development.json
