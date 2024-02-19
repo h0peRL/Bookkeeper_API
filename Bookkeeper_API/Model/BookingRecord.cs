@@ -2,49 +2,37 @@
 {
     public class BookingRecord
     {
-        private readonly int _id;
-        private string? _bookingNote;
-        private int _bookingDate;
-        private Account _debitAccount;
-        private Account _creditAccount;
-        private decimal _amount;
-
-        public BookingRecord(int? id, string? bookingNote, Account creditAccount, Account debitAccount, decimal amount)
+        public BookingRecord(int id, string? bookingNote, Account creditAccount, Account debitAccount, decimal amount)
         {
-            _id = id;
-            _bookingNote = bookingNote;
-            _creditAccount = creditAccount;
-            _debitAccount = debitAccount;
-            _amount = amount;
-
-            // set today's date as timestamp
-            throw new NotImplementedException();
+            Id = id;
+            BookingNote = bookingNote;
+            DebitAccount = debitAccount;
+            CreditAccount = creditAccount;
+            Amount = amount;
+            BookingDate = 1000; // TODO: set current timestamp
         }
 
-        public int? Id
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookingRecord"/> class.
+        /// The Entity Framework requires an empty constructor. Please do not remove it.
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        private BookingRecord()
         {
-            get { return _id; }
         }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        public string? BookingNote
-        {
-            get { return _bookingNote; }
-        }
+        public int Id { get; private set; }
 
-        public Account DebitAccount
-        {
-            get { return _debitAccount; }
-        }
+        public string? BookingNote { get; private set; }
 
-        public Account CreditAccount
-        {
-            get { return _creditAccount; }
-        }
+        public Account DebitAccount { get; private set; }
 
-        public decimal Amount
-        {
-            get { return _amount; }
-        }
+        public Account CreditAccount { get; private set; }
+
+        public decimal Amount { get; private set; }
+
+        public int BookingDate { get; private set; }
 
         public void Execute()
         {
