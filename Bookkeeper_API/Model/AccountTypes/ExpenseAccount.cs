@@ -2,8 +2,8 @@
 {
     public class ExpenseAccount : Account
     {
-        public ExpenseAccount(int id, string name)
-            : base(id, name)
+        public ExpenseAccount(int id, string accountName)
+            : base(id, accountName)
         {
         }
 

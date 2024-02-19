@@ -2,10 +2,10 @@
 {
     public abstract class Account
     {
-        protected Account(int id, string name)
+        protected Account(int id, string accountName)
         {
             Id = id;
-            Name = name;
+            AccountName = accountName;
         }
 
         /// <summary>
@@ -20,7 +20,7 @@
 
         public int Id { get; private set; }
 
-        public string Name { get; private set; }
+        public string AccountName { get; private set; }
 
         public decimal CalculateBalance()
         {
