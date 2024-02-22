@@ -7,12 +7,17 @@
         {
         }
 
-        public override void DoDebitBooking()
+        public override decimal CalculateBalance()
         {
             throw new NotImplementedException();
         }
 
-        public override void DoCreditBooking()
+        public override void DoDebitBooking(decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DoCreditBooking(decimal amount)
         {
             throw new NotImplementedException();
         }

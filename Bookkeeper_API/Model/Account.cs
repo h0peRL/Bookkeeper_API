@@ -21,13 +21,10 @@
             get { return _name; }
         }
 
-        public decimal CalculateBalance()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract decimal CalculateBalance();
 
-        public abstract void DoDebitBooking();
+        public abstract void DoDebitBooking(decimal amount);
 
-        public abstract void DoCreditBooking();
+        public abstract void DoCreditBooking(decimal amount);
     }
 }
