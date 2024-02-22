@@ -2,8 +2,8 @@
 {
     public class PassiveAccount : Account
     {
-        public PassiveAccount(int id, string name)
-            : base(id, name)
+        public PassiveAccount(int id, string accountName)
+            : base(id, accountName)
         {
         }
 
