@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Bookkeeper_API.Tests
+﻿namespace Bookkeeper_API.Tests
 {
     public class BookingRecordTest
     {
@@ -13,7 +11,7 @@ namespace Bookkeeper_API.Tests
             Account debitAccount = new ActiveAccount(1020, "Bank");
             Account creditAccount = new PassiveAccount(2000, "VLL");
             const decimal amount = 100;
-            
+
             BookingRecord bookingRecord = new BookingRecord(id, bookingNote, debitAccount, creditAccount, amount);
 
             // Act
