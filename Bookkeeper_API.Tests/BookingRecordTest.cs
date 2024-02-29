@@ -22,7 +22,7 @@ namespace Bookkeeper_API.Tests
                 DataRepository = new TestDataRepository()
             };
 
-            BookingRecord bookingRecord = new BookingRecord(id, bookingNote, debitAccount, creditAccount, amount);
+            BookingRecord bookingRecord = new(id, bookingNote, debitAccount, creditAccount, amount);
 
             // Act
             // add 100 to debit account, so it won't get negative balance
