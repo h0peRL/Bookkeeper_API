@@ -1,4 +1,5 @@
 ﻿using Bookkeeper_API.Model.AccountTypes;
+using Bookkeeper_API.Tests.TestObjectClasses;
 
 namespace Bookkeeper_API.Tests
 {
@@ -8,7 +9,7 @@ namespace Bookkeeper_API.Tests
         public void TestCalculateBalance()
         {
             // Arrange
-            PassiveAccount passiveAccount = new(1020, "Bank");
+            PassiveAccount passiveAccount = new(1020, "Bank", new TestDataRepository());
 
             // Act
             decimal balance = passiveAccount.CalculateBalance();
@@ -21,7 +22,7 @@ namespace Bookkeeper_API.Tests
         public void TestDoDebitBooking()
         {
             // Arrange
-            PassiveAccount passiveAccount = new(1020, "Bank");
+            PassiveAccount passiveAccount = new(1020, "Bank", new TestDataRepository());
             const decimal debitAmount = 100;
 
             // Act
@@ -35,7 +36,7 @@ namespace Bookkeeper_API.Tests
         public void TestDoCreditBooking()
         {
             // Arrange
-            PassiveAccount passiveAccount = new(1020, "Bank");
+            PassiveAccount passiveAccount = new(1020, "Bank", new TestDataRepository());
             const decimal creditAmount = 100;
 
             // Act
@@ -49,7 +50,7 @@ namespace Bookkeeper_API.Tests
         public void TestDoMultipleBookings()
         {
             // Arrange
-            PassiveAccount passiveAccount = new(1020, "Bank");
+            PassiveAccount passiveAccount = new(1020, "Bank", new TestDataRepository());
             const decimal creditAmount = 100;
             const decimal debitAmount = 50;
 
