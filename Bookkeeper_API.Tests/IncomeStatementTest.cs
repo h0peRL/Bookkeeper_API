@@ -80,9 +80,8 @@ namespace Bookkeeper_API.Tests
             {
                 Accounts = new Dictionary<(int, string), decimal>
                 {
-                    { (1020, "Bank"), 100 },
-                    { (2000, "VLL"), 200 },
-                    { (1100, "FLL"), 300 }
+                    { (4200, "Merchandise expense"), 200 },
+                    { (3200, "Trading revenue"), 400 }
                 },
                 Total = 400,
                 Date = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
