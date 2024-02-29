@@ -8,7 +8,7 @@ namespace Bookkeeper_API.Tests
         public void TestCalculateBalance()
         {
             // Arrange
-            ActiveAccount activeAccount = new ActiveAccount(1020, "Bank");
+            ActiveAccount activeAccount = new(1020, "Bank");
 
             // Act
             decimal balance = activeAccount.CalculateBalance();
@@ -21,7 +21,7 @@ namespace Bookkeeper_API.Tests
         public void TestDoDebitBooking()
         {
             // Arrange
-            ActiveAccount activeAccount = new ActiveAccount(1020, "Bank");
+            ActiveAccount activeAccount = new(1020, "Bank");
             const decimal debitAmount = 100;
 
             // Act
@@ -35,7 +35,7 @@ namespace Bookkeeper_API.Tests
         public void TestDoCreditBooking()
         {
             // Arrange
-            ActiveAccount activeAccount = new ActiveAccount(1020, "Bank");
+            ActiveAccount activeAccount = new(1020, "Bank");
             const decimal creditAmount = 100;
 
             // Act
@@ -43,6 +43,22 @@ namespace Bookkeeper_API.Tests
 
             // Assert
             Assert.Equal(-creditAmount, activeAccount.CalculateBalance());
+        }
+
+        [Fact(Skip = "not implemented")]
+        public void TestDoMultipleBookings()
+        {
+            // Arrange
+            ActiveAccount activeAccount = new(1020, "Bank");
+            const decimal debitAmount = 100;
+            const decimal creditAmount = 50;
+
+            // Act
+            activeAccount.DoDebitBooking(debitAmount);
+            activeAccount.DoCreditBooking(creditAmount);
+
+            // Assert
+            Assert.Equal(50, activeAccount.CalculateBalance());
         }
     }
 }
