@@ -8,7 +8,10 @@ namespace Bookkeeper_API.Tests.AccountTests
         public void TestCalculateBalance()
         {
             // Arrange
-            ExpenseAccount expenseAccount = new(1020, "Bank", new TestDataRepository());
+            ExpenseAccount expenseAccount = new(1020, "Bank")
+            {
+                DataRepository = new TestDataRepository()
+            };
 
             // Act
             decimal balance = expenseAccount.CalculateBalance();
@@ -21,7 +24,10 @@ namespace Bookkeeper_API.Tests.AccountTests
         public void TestDoDebitBooking()
         {
             // Arrange
-            ExpenseAccount expenseAccount = new(1020, "Bank", new TestDataRepository());
+            ExpenseAccount expenseAccount = new(1020, "Bank")
+            {
+                DataRepository = new TestDataRepository()
+            };
             const decimal debitAmount = 100;
 
             // Act
@@ -35,7 +41,10 @@ namespace Bookkeeper_API.Tests.AccountTests
         public void TestDoCreditBooking()
         {
             // Arrange
-            ExpenseAccount expenseAccount = new(1020, "Bank", new TestDataRepository());
+            ExpenseAccount expenseAccount = new(1020, "Bank")
+            {
+                DataRepository = new TestDataRepository()
+            };
             const decimal creditAmount = 100;
 
             // Act
@@ -49,7 +58,10 @@ namespace Bookkeeper_API.Tests.AccountTests
         public void TestDoMultipleBookings()
         {
             // Arrange
-            ExpenseAccount expenseAccount = new(1020, "Bank", new TestDataRepository());
+            ExpenseAccount expenseAccount = new(1020, "Bank")
+            {
+                DataRepository = new TestDataRepository()
+            };
             const decimal debitAmount = 100;
             const decimal creditAmount = 50;
 
