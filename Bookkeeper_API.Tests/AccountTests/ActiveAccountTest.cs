@@ -1,7 +1,6 @@
-﻿using Bookkeeper_API.Model.AccountTypes;
-using Bookkeeper_API.Tests.TestObjectClasses;
+﻿using Bookkeeper_API.Tests.TestObjectClasses;
 
-namespace Bookkeeper_API.Tests
+namespace Bookkeeper_API.Tests.AccountTests
 {
     public class ActiveAccountTest
     {
