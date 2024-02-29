@@ -1,11 +1,14 @@
-﻿namespace Bookkeeper_API.Model
+﻿using Bookkeeper_API.Data;
+
+namespace Bookkeeper_API.Model
 {
     public abstract class Account
     {
-        protected Account(int id, string accountName)
+        protected Account(int id, string accountName, IDataRepository dataRepository)
         {
             Id = id;
             AccountName = accountName;
+            DataRepository = dataRepository;
         }
 
         /// <summary>
@@ -21,6 +24,8 @@
         public int Id { get; private set; }
 
         public string AccountName { get; private set; }
+
+        protected IDataRepository DataRepository { get; private set; }
 
         public abstract decimal CalculateBalance();
 

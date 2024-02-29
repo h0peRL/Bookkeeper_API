@@ -1,9 +1,11 @@
-﻿namespace Bookkeeper_API.Model.AccountTypes
+﻿using Bookkeeper_API.Data;
+
+namespace Bookkeeper_API.Model.AccountTypes
 {
     public class IncomeAccount : Account
     {
-        public IncomeAccount(int id, string accountName)
-            : base(id, accountName)
+        public IncomeAccount(int id, string accountName, IDataRepository dataRepository)
+            : base(id, accountName, dataRepository)
         {
         }
 
