@@ -28,7 +28,7 @@ namespace Bookkeeper_API.Tests
             passiveAccount.DoDebitBooking(debitAmount);
 
             // Assert
-            Assert.Equal(debitAmount, passiveAccount.CalculateBalance());
+            Assert.Equal(-debitAmount, passiveAccount.CalculateBalance());
         }
 
         [Fact(Skip = "not implemented")]
@@ -42,7 +42,7 @@ namespace Bookkeeper_API.Tests
             passiveAccount.DoCreditBooking(creditAmount);
 
             // Assert
-            Assert.Equal(-creditAmount, passiveAccount.CalculateBalance());
+            Assert.Equal(creditAmount, passiveAccount.CalculateBalance());
         }
 
         [Fact(Skip = "not implemented")]
@@ -50,12 +50,12 @@ namespace Bookkeeper_API.Tests
         {
             // Arrange
             PassiveAccount passiveAccount = new(1020, "Bank");
-            const decimal debitAmount = 100;
-            const decimal creditAmount = 50;
+            const decimal creditAmount = 100;
+            const decimal debitAmount = 50;
 
             // Act
-            passiveAccount.DoDebitBooking(debitAmount);
             passiveAccount.DoCreditBooking(creditAmount);
+            passiveAccount.DoDebitBooking(debitAmount);
 
             // Assert
             Assert.Equal(50, passiveAccount.CalculateBalance());

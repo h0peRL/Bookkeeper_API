@@ -28,7 +28,7 @@ namespace Bookkeeper_API.Tests
             incomeAccount.DoDebitBooking(debitAmount);
 
             // Assert
-            Assert.Equal(debitAmount, incomeAccount.CalculateBalance());
+            Assert.Equal(-debitAmount, incomeAccount.CalculateBalance());
         }
 
         [Fact(Skip = "not implemented")]
@@ -42,7 +42,7 @@ namespace Bookkeeper_API.Tests
             incomeAccount.DoCreditBooking(creditAmount);
 
             // Assert
-            Assert.Equal(-creditAmount, incomeAccount.CalculateBalance());
+            Assert.Equal(creditAmount, incomeAccount.CalculateBalance());
         }
 
         [Fact(Skip = "not implemented")]
@@ -50,12 +50,12 @@ namespace Bookkeeper_API.Tests
         {
             // Arrange
             IncomeAccount incomeAccount = new(1020, "Bank");
-            const decimal debitAmount = 100;
-            const decimal creditAmount = 50;
+            const decimal creditAmount = 100;
+            const decimal debitAmount = 50;
 
             // Act
-            incomeAccount.DoDebitBooking(debitAmount);
             incomeAccount.DoCreditBooking(creditAmount);
+            incomeAccount.DoDebitBooking(debitAmount);
 
             // Assert
             Assert.Equal(50, incomeAccount.CalculateBalance());
