@@ -1,4 +1,6 @@
-﻿namespace Bookkeeper_API.Tests
+﻿using Bookkeeper_API.Tests.TestObjectClasses;
+
+namespace Bookkeeper_API.Tests
 {
     public class BookingRecordTest
     {
@@ -8,8 +10,8 @@
             // Arrange
             const int id = 1;
             const string bookingNote = "Test";
-            Account debitAccount = new ActiveAccount(1020, "Bank");
-            Account creditAccount = new PassiveAccount(2000, "VLL");
+            Account debitAccount = new ActiveAccount(1020, "Bank", new TestDataRepository());
+            Account creditAccount = new PassiveAccount(2000, "VLL", new TestDataRepository());
             const decimal amount = 100;
 
             BookingRecord bookingRecord = new BookingRecord(id, bookingNote, debitAccount, creditAccount, amount);
