@@ -10,9 +10,17 @@ namespace Bookkeeper_API.Tests
             // Arrange
             const int id = 1;
             const string bookingNote = "Test";
-            Account debitAccount = new ActiveAccount(1020, "Bank", new TestDataRepository());
-            Account creditAccount = new PassiveAccount(2000, "VLL", new TestDataRepository());
             const decimal amount = 100;
+
+            Account debitAccount = new ActiveAccount(1020, "Bank")
+            {
+                DataRepository = new TestDataRepository()
+            };
+
+            Account creditAccount = new PassiveAccount(2000, "VLL")
+            {
+                DataRepository = new TestDataRepository()
+            };
 
             BookingRecord bookingRecord = new BookingRecord(id, bookingNote, debitAccount, creditAccount, amount);
 
