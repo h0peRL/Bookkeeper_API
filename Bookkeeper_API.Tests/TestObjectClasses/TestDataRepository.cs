@@ -1,4 +1,4 @@
-using Bookkeeper_API.Data;
+﻿using Bookkeeper_API.Data;
 
 namespace Bookkeeper_API.Tests.TestObjectClasses
 {
@@ -10,7 +10,11 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 
         public void AddBookingRecord(BookingRecord record)
         {
-            bookingRecords.Add(record);
+            var seeder = new TestDataSeeder(this);
+
+            seeder.SeedAccounts();
+            seeder.SeedBookingRecords();
+            seeder.SeedUsers();
         }
 
         public void AddUser(User user)
