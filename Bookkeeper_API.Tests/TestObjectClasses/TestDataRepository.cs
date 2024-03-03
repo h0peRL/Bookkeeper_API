@@ -4,44 +4,57 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 {
     internal class TestDataRepository : IDataRepository
     {
+        private List<BookingRecord> bookingRecords = new();
+        private List<User> users = new();
+        private List<Account> accounts = new();
+
         public void AddBookingRecord(BookingRecord record)
         {
-            throw new NotImplementedException();
+            bookingRecords.Add(record);
         }
 
         public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            users.Add(user);
         }
 
         public void AuthorizeNewUser(int userId)
         {
-            throw new NotImplementedException();
+            User? user = users.Find(u => u.Id == userId)
+                ?? throw new Exception($"No user with Id {userId} was found.");
+
+            user.SetRole(new AuthorizedUserRoleState());
         }
 
         public void DisapproveExistingUser(int userId)
         {
-            throw new NotImplementedException();
+            User? user = users.Find(u => u.Id == userId)
+                ?? throw new Exception($"No user with Id {userId} was found.");
+
+            user.SetRole(new NewUserRoleState());
         }
 
         public IEnumerable<BookingRecord> FindBookingRecordsForAccount(int accountId)
         {
-            throw new NotImplementedException();
+            return bookingRecords.FindAll(a => a.DebitAccount.Id == accountId || a.CreditAccount.Id == accountId);
         }
 
         public IEnumerable<Account> GetBalanceSheetAccounts()
         {
-            throw new NotImplementedException();
+            return accounts.FindAll(a => a.Id.ToString().StartsWith('1') || a.Id.ToString().StartsWith('2'));
         }
 
         public IEnumerable<Account> GetIncomeStatementAccounts()
         {
-            throw new NotImplementedException();
+            return accounts.FindAll(a => a.Id.ToString()[0] > 2);
         }
 
         public User GetUserById(int userId)
         {
-            throw new NotImplementedException();
+            User user = users.Find(u => u.Id == userId)
+                ?? throw new Exception($"No user with Id {userId} was found.");
+
+            return user;
         }
     }
 }
