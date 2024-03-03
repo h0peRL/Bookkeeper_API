@@ -1,4 +1,4 @@
-﻿using Bookkeeper_API.Data;
+using Bookkeeper_API.Data;
 
 namespace Bookkeeper_API.Tests.TestObjectClasses
 {
@@ -37,6 +37,14 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
         public IEnumerable<BookingRecord> FindBookingRecordsForAccount(int accountId)
         {
             return bookingRecords.FindAll(a => a.DebitAccount.Id == accountId || a.CreditAccount.Id == accountId);
+        }
+
+        public Account GetAccountById(int accountId)
+        {
+            Account account = accounts.Find(a => a.Id == accountId)
+                ?? throw new Exception($"No account with Id {accountId} was found.");
+
+            return account;
         }
 
         public IEnumerable<Account> GetBalanceSheetAccounts()

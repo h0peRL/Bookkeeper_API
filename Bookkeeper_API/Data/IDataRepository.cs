@@ -22,6 +22,13 @@ namespace Bookkeeper_API.Data
         IEnumerable<BookingRecord> FindBookingRecordsForAccount(int accountId);
 
         /// <summary>
+        /// Select an account by its Id.
+        /// </summary>
+        /// <param name="accountId">Id of the account you are looking for.</param>
+        /// <returns>Account with the Id that has been passed as a parameter.</returns>
+        Account GetAccountById(int accountId);
+
+        /// <summary>
         /// Select all balance sheet accounts.
         /// </summary>
         /// <returns>Collection of active and passive accounts.</returns>

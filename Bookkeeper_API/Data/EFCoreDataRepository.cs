@@ -38,6 +38,11 @@ namespace Bookkeeper_API.Data
             || b.CreditAccount.Id == accountId);
         }
 
+        public Account GetAccountById(int accountId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Account> GetBalanceSheetAccounts()
         {
             throw new NotImplementedException();
