@@ -55,7 +55,7 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 
         private static Dictionary<int, string> ImportAccountsFromCSV()
         {
-            string path = @"..\Kontentrahmen_Englisch.csv";
+            string path = @".\account_chart.csv";
             Dictionary<int, string> accountValues = new();
 
             using var reader = new StreamReader(path);

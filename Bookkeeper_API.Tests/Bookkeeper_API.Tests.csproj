@@ -27,4 +27,10 @@
     <ProjectReference Include="..\Bookkeeper_API\Bookkeeper_API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="account_chart.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
