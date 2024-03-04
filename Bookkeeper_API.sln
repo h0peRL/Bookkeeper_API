@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookkeeper_API", "Bookkeeper_API\Bookkeeper_API.csproj", "{752932EC-97D4-48A8-8ADE-13FEF5ED6DBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookkeeper_API.Tests", "Bookkeeper_API.Tests\Bookkeeper_API.Tests.csproj", "{E30B69EA-05E8-4347-A38F-94FD620A3CB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{752932EC-97D4-48A8-8ADE-13FEF5ED6DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{752932EC-97D4-48A8-8ADE-13FEF5ED6DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{752932EC-97D4-48A8-8ADE-13FEF5ED6DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E30B69EA-05E8-4347-A38F-94FD620A3CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E30B69EA-05E8-4347-A38F-94FD620A3CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E30B69EA-05E8-4347-A38F-94FD620A3CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E30B69EA-05E8-4347-A38F-94FD620A3CB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

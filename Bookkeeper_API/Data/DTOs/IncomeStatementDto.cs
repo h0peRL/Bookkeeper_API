@@ -2,7 +2,7 @@
 {
     public class IncomeStatementDto
     {
-        required public Dictionary<Dictionary<int, string>, decimal> Accounts { get; set; }
+        required public Dictionary<(int, string), decimal> Accounts { get; set; }
 
         required public decimal Total { get; set; }
 
