@@ -1,31 +1,32 @@
-﻿using Bookkeeper_API.Tests.TestObjectClasses;
+using Bookkeeper_API.Tests.TestObjectClasses;
 
 namespace Bookkeeper_API.Tests
 {
     public class BookingRecordTest
     {
-        [Fact(Skip = "not implemented")]
+        private readonly TestDataRepository _repository;
+
+        public BookingRecordTest()
+        {
+            // Setup
+            _repository = new TestDataRepository();
+            _repository.SeedAccounts();
+        }
+
         public void TestExecute()
         {
             // Arrange
-            const int id = 1;
             const string bookingNote = "Test";
             const decimal amount = 100;
 
-            Account debitAccount = new ActiveAccount(1020, "Bank")
-            {
-                DataRepository = new TestDataRepository()
-            };
+            Account debitAccount = _repository.GetAccountById(1020); // Bank
+            Account creditAccount = _repository.GetAccountById(2000); // VLL
 
-            Account creditAccount = new PassiveAccount(2000, "VLL")
-            {
-                DataRepository = new TestDataRepository()
-            };
-
-            BookingRecord bookingRecord = new(id, bookingNote, debitAccount, creditAccount, amount);
+            BookingRecord bookingRecord = new(null, bookingNote, debitAccount, creditAccount, amount);
 
             // Act
             // add 100 to debit account, so it won't get negative balance
+            // TODO: Deal with this as it might cause an issue. Unit tests should be isolated and independent of other ressources.
             creditAccount.DoDebitBooking(100);
 
             bookingRecord.Execute();
