@@ -3,7 +3,7 @@
 namespace Bookkeeper_API.Model
 {
     /// <summary>
-    /// This class is an singleton implementation of a regular <see cref="Queue{T}"/>.
+    /// This class is a singleton implementation of a regular <see cref="Queue{T}"/>.
     /// The point of it is to offer a FIFO-like data structure to process booking requests in an orderly manner.
     /// This way a conflict with impossible bookings can be avoided.
     /// </summary>
