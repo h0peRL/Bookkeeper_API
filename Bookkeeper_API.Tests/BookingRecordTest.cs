@@ -13,6 +13,7 @@ namespace Bookkeeper_API.Tests
             _repository.SeedAccounts();
         }
 
+        [Fact]
         public void TestExecute()
         {
             // Arrange
@@ -36,6 +37,7 @@ namespace Bookkeeper_API.Tests
             Assert.Equal(0, creditAccount.CalculateBalance());
         }
 
+        [Fact]
         public void TestDate()
         {
             // Arrange
@@ -56,6 +58,7 @@ namespace Bookkeeper_API.Tests
             Assert.True((bookingTimestamp - nowTimestamp) < -2); // 2s of tolerance
         }
 
+        [Fact]
         public void TestBookingNote()
         {
             // Arrange
