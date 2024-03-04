@@ -27,12 +27,18 @@ namespace Bookkeeper_API.Controllers
         {
             BookingRecord record = BookingRecordConverter.BookingDtoToBookingRecord(request, _dataRepository);
 
+            // If the "new" booking record already has an Id.
+            if (record.Id != null)
+            {
+                return UnprocessableEntity("Your booking record had a given Id. This may cause issues if it gets processed.");
+            }
+
             // The validation of the booking request happens at processing.
             // Only then will it known if the booking is possible.
 
             BookingQueue.GetInstance().Enqueue(record);
 
-            return Ok("Your booking requests has been submitted.");
+            return Ok("Your booking requests has been submitted for processing.");
         }
     }
 }
