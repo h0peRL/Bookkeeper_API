@@ -2,7 +2,7 @@
 {
     public class BookingRecord
     {
-        public BookingRecord(int id, string? bookingNote, Account creditAccount, Account debitAccount, decimal amount)
+        public BookingRecord(int? id, string? bookingNote, Account creditAccount, Account debitAccount, decimal amount)
         {
             Id = id;
             BookingNote = bookingNote;
@@ -22,7 +22,7 @@
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        public int Id { get; private set; }
+        public int? Id { get; private set; }
 
         public string? BookingNote { get; private set; }
 
