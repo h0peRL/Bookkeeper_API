@@ -20,21 +20,18 @@ namespace Bookkeeper_API.Tests
             const string bookingNote = "Test";
             const decimal amount = 100;
 
-            Account debitAccount = _repository.GetAccountById(1020); // Bank
-            Account creditAccount = _repository.GetAccountById(2000); // VLL
+            Account debitAccount = _repository.GetAccountById(1500); // Machines 
+            Account creditAccount = _repository.GetAccountById(2000); // Trade creditors (VLL)
 
             BookingRecord bookingRecord = new(null, bookingNote, debitAccount, creditAccount, amount);
 
             // Act
-            // add 100 to debit account, so it won't get negative balance
-            // TODO: Deal with this as it might cause an issue. Unit tests should be isolated and independent of other ressources.
-            creditAccount.DoDebitBooking(100);
-
             bookingRecord.Execute();
 
             // Assert
+            // Both accounts should have increased by 100 as Machines is active ande Trade creditors are passive.
             Assert.Equal(100, debitAccount.CalculateBalance());
-            Assert.Equal(0, creditAccount.CalculateBalance());
+            Assert.Equal(100, creditAccount.CalculateBalance());
         }
 
         [Fact]
