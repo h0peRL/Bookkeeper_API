@@ -4,17 +4,46 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 {
     internal class TestDataRepository : IDataRepository
     {
+        private TestDataSeeder seeder;
         private List<BookingRecord> bookingRecords = new();
         private List<User> users = new();
         private List<Account> accounts = new();
 
-        public void AddBookingRecord(BookingRecord record)
+        public TestDataRepository()
         {
-            var seeder = new TestDataSeeder(this);
+            seeder = new TestDataSeeder(this);
+        }
 
+        public void SeedAll()
+        {
             seeder.SeedAccounts();
             seeder.SeedBookingRecords();
             seeder.SeedUsers();
+        }
+
+        public void SeedAccounts()
+        {
+            seeder.SeedAccounts();
+        }
+
+        public void SeedBookingRecords()
+        {
+            seeder.SeedBookingRecords();
+        }
+
+        public void SeedUsers()
+        {
+            seeder.SeedUsers();
+        }
+
+        public void AddAccount(Account account)
+        {
+            accounts.Add(account);
+        }
+
+        public void AddBookingRecord(BookingRecord record)
+        {
+            bookingRecords.Add(record);
         }
 
         public void AddUser(User user)

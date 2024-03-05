@@ -50,6 +50,12 @@ namespace Bookkeeper_API.Data
         // INSERT OPERATIONS
 
         /// <summary>
+        /// Insert a new account.
+        /// </summary>
+        /// <param name="account">Account to insert.</param>
+        void AddAccount(Account account);
+
+        /// <summary>
         /// Insert a new booking record.
         /// </summary>
         /// <param name="record">Record to insert.</param>

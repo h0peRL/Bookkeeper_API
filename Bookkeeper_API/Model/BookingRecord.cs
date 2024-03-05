@@ -1,8 +1,10 @@
-﻿namespace Bookkeeper_API.Model
+﻿using Bookkeeper_API.Data;
+
+namespace Bookkeeper_API.Model
 {
     public class BookingRecord
     {
-        public BookingRecord(int id, string? bookingNote, Account creditAccount, Account debitAccount, decimal amount)
+        public BookingRecord(int? id, string? bookingNote, Account creditAccount, Account debitAccount, decimal amount)
         {
             Id = id;
             BookingNote = bookingNote;
@@ -22,7 +24,7 @@
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        public int Id { get; private set; }
+        public int? Id { get; private set; }
 
         public string? BookingNote { get; private set; }
 
@@ -36,7 +38,16 @@
 
         public void Execute()
         {
-            throw new NotImplementedException();
+            // make sure data source is matching
+            if (!ReferenceEquals(DebitAccount.DataRepository, CreditAccount.DataRepository))
+            {
+                throw new Exception("Data repository pointers of the accounts do not match!" +
+                    "Make sure you're using the same datab repo instance on both accounts.");
+            }
+
+            IDataRepository repo = DebitAccount.DataRepository;
+
+            repo.AddBookingRecord(this);
         }
     }
 }

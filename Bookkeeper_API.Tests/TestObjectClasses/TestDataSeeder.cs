@@ -13,13 +13,12 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 
         public void SeedAccounts()
         {
-            List<Account> accounts = new();
             Dictionary<int, string> dictionary = ImportAccountsFromCSV();
 
             foreach (KeyValuePair<int, string> kvp in dictionary)
             {
                 Account account = CreateAccount(kvp, _repository);
-                accounts.Add(account);
+                _repository.AddAccount(account);
             }
         }
 
@@ -55,7 +54,7 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 
         private static Dictionary<int, string> ImportAccountsFromCSV()
         {
-            string path = @"..\Kontentrahmen_Englisch.csv";
+            string path = @"./account_chart.csv";
             Dictionary<int, string> accountValues = new();
 
             using var reader = new StreamReader(path);
@@ -97,7 +96,7 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
                 '2' => new PassiveAccount(accountKvp.Key, accountKvp.Value) { DataRepository = repo },
                 '3' => new IncomeAccount(accountKvp.Key, accountKvp.Value) { DataRepository = repo },
                 '4' or '5' or '6' or '7' or '8' or '9' => new ExpenseAccount(accountKvp.Key, accountKvp.Value) { DataRepository = repo },
-                _ => throw new Exception("Could not assign account to right account type."),
+                _ => throw new Exception("Could not assign account to right account type. Account Id was: " + accountKvp.Key),
             };
         }
     }

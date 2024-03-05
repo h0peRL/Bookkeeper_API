@@ -1,4 +1,7 @@
-﻿using Bookkeeper_API.Data.DTOs;
+﻿using Bookkeeper_API.Data;
+using Bookkeeper_API.Data.DTOs;
+using Bookkeeper_API.Model;
+using Bookkeeper_API.Model.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,16 +14,31 @@ namespace Bookkeeper_API.Controllers
     public class BookingController : ControllerBase
     {
         private readonly ILogger<BookingController> _logger;
+        private readonly IDataRepository _dataRepository;
 
-        public BookingController(ILogger<BookingController> logger)
+        public BookingController(ILogger<BookingController> logger, AppDbContext dbContext)
         {
             _logger = logger;
+            _dataRepository = new EFCoreDataRepository(dbContext);
         }
 
         [HttpPost]
         public IActionResult Book(BookingDto request)
         {
-            throw new NotImplementedException();
+            BookingRecord record = BookingRecordConverter.BookingDtoToBookingRecord(request, _dataRepository);
+
+            // If the "new" booking record already has an Id.
+            if (record.Id != null)
+            {
+                return UnprocessableEntity("Your booking record had a given Id. This may cause issues if it gets processed.");
+            }
+
+            // The validation of the booking request happens at processing.
+            // Only then will it known if the booking is possible.
+
+            BookingQueue.GetInstance().Enqueue(record);
+
+            return Ok("Your booking requests has been submitted for processing.");
         }
     }
 }
