@@ -12,6 +12,11 @@ namespace Bookkeeper_API.Data
             _db = dbContext;
         }
 
+        public void AddAccount(Account account)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddBookingRecord(BookingRecord record)
         {
             throw new NotImplementedException();

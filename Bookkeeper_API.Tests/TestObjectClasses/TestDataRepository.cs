@@ -36,6 +36,11 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
             seeder.SeedUsers();
         }
 
+        public void AddAccount(Account account)
+        {
+            accounts.Add(account);
+        }
+
         public void AddBookingRecord(BookingRecord record)
         {
             bookingRecords.Add(record);
