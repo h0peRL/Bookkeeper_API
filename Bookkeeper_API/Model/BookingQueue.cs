@@ -13,7 +13,7 @@ namespace Bookkeeper_API.Model
         // https://refactoring.guru/design-patterns/singleton/csharp/example#example-1
         // Design Patterns, Elements of Reusable Object-Oriented Software by Erich Gamma et al.
 
-        private static readonly object _lock = new ();
+        private static readonly object _lock = new();
 
         // Singleton instance that gets referenced, if it has been asked for.
         private static BookingQueue? _instance;

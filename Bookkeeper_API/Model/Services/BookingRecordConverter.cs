@@ -10,7 +10,7 @@ namespace Bookkeeper_API.Model.Services
             Account debitAccount = dataRepository.GetAccountById(bookingDto.DebitAccount);
             Account creditAccount = dataRepository.GetAccountById(bookingDto.CreditAccount);
 
-            BookingRecord record = new (
+            BookingRecord record = new(
                 null,
                 bookingDto.BookingNote,
                 creditAccount,
