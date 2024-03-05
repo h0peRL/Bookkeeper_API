@@ -23,7 +23,7 @@ namespace Bookkeeper_API.Tests
             Account debitAccount = _repository.GetAccountById(1500); // Machines 
             Account creditAccount = _repository.GetAccountById(2000); // Trade creditors (VLL)
 
-            BookingRecord bookingRecord = new(null, bookingNote, debitAccount, creditAccount, amount);
+            BookingRecord bookingRecord = new(null, bookingNote, creditAccount, debitAccount, amount);
 
             // Act
             bookingRecord.Execute();
