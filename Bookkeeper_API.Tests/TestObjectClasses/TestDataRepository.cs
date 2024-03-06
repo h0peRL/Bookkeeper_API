@@ -1,4 +1,4 @@
-﻿using Bookkeeper_API.Data;
+using Bookkeeper_API.Data;
 
 namespace Bookkeeper_API.Tests.TestObjectClasses
 {
@@ -51,7 +51,7 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
             users.Add(user);
         }
 
-        public void AuthorizeNewUser(int userId)
+        public void AuthorizeNewUser(User user)
         {
             User? user = users.Find(u => u.Id == userId)
                 ?? throw new Exception($"No user with Id {userId} was found.");
@@ -59,7 +59,7 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
             user.SetRole(new AuthorizedUserRoleState());
         }
 
-        public void DisapproveExistingUser(int userId)
+        public void DisapproveExistingUser(User user)
         {
             User? user = users.Find(u => u.Id == userId)
                 ?? throw new Exception($"No user with Id {userId} was found.");

@@ -1,4 +1,4 @@
-﻿using Bookkeeper_API.Model;
+using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.UserManagement;
 
 namespace Bookkeeper_API.Data
@@ -27,12 +27,12 @@ namespace Bookkeeper_API.Data
             throw new NotImplementedException();
         }
 
-        public void AuthorizeNewUser(int userId)
+        public void AuthorizeNewUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public void DisapproveExistingUser(int userId)
+        public void DisapproveExistingUser(User user)
         {
             throw new NotImplementedException();
         }

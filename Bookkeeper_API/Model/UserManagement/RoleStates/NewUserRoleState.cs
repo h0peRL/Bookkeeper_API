@@ -1,4 +1,4 @@
-﻿namespace Bookkeeper_API.Model.UserManagement.RoleStates
+namespace Bookkeeper_API.Model.UserManagement.RoleStates
 {
     public class NewUserRoleState : IUserRoleState
     {
@@ -9,7 +9,7 @@
             return _roleName;
         }
 
-        public void SetRoleState(IUserRoleState roleState)
+        public void SetRoleState(User user)
         {
             throw new NotImplementedException();
         }

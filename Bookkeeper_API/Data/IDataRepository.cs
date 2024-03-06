@@ -1,4 +1,4 @@
-﻿using Bookkeeper_API.Model;
+using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.UserManagement;
 
 namespace Bookkeeper_API.Data
@@ -72,13 +72,13 @@ namespace Bookkeeper_API.Data
         /// <summary>
         /// Authorizes newly registered users to use the system. Without this, the user won't be allowed to perform any operations.
         /// </summary>
-        /// <param name="userId">Id of the user to be authorized for use.</param>
-        void AuthorizeNewUser(int userId);
+        /// <param name="user">The user to be authorized.</param>
+        void AuthorizeNewUser(User user);
 
         /// <summary>
         /// Removes authorization from existing users.
         /// </summary>
-        /// <param name="userId">Id of the user to be disapproved.</param>
-        void DisapproveExistingUser(int userId);
+        /// <param name="user">The user to be disapproved.</param>
+        void DisapproveExistingUser(User user);
     }
 }
