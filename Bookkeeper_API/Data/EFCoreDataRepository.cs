@@ -1,5 +1,7 @@
 using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.UserManagement;
+using Bookkeeper_API.Model.UserManagement.RoleStates;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookkeeper_API.Data
 {
@@ -34,7 +36,9 @@ namespace Bookkeeper_API.Data
 
         public void AuthorizeNewUser(User user)
         {
-            throw new NotImplementedException();
+            user.SetRole(new AuthorizedUserRoleState());
+            _db.Users.Update(user);
+            _db.SaveChanges();
         }
 
         public void DisapproveExistingUser(User user)
