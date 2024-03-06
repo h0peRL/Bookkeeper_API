@@ -47,7 +47,19 @@ namespace Bookkeeper_API.Controllers
         [HttpPost("login")]
         public IActionResult Login(UserDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User user = _dataRepository.GetUserByUsername(request.Username);
+                if (user == null) return Unauthorized("Invalid username or password");
+                if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash)) return Unauthorized("Invalid username or password");
+                if (user.Role.GetRoleName() == "new user") return Unauthorized("User is not authorized yet");
+
+                string token = GenerateToken(user);
+                return Ok(token);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
-}
