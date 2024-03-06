@@ -1,5 +1,7 @@
 ﻿using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.UserManagement;
+using Bookkeeper_API.Model.UserManagement.RoleStates;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookkeeper_API.Data
 {
@@ -24,17 +26,26 @@ namespace Bookkeeper_API.Data
 
         public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            if (_db.Users.Any(u => u.Username == user.Username))
+            {
+                throw new InvalidOperationException("User already exists");
+            }
+            _db.Users.Add(user);
+            _db.SaveChanges();
         }
 
-        public void AuthorizeNewUser(int userId)
+        public void AuthorizeNewUser(User user)
         {
-            throw new NotImplementedException();
+            user.SetRole(new AuthorizedUserRoleState());
+            _db.Users.Update(user);
+            _db.SaveChanges();
         }
 
-        public void DisapproveExistingUser(int userId)
+        public void DisapproveExistingUser(User user)
         {
-            throw new NotImplementedException();
+            user.SetRole(new NewUserRoleState());
+            _db.Users.Update(user);
+            _db.SaveChanges();
         }
 
         public IEnumerable<BookingRecord> FindBookingRecordsForAccount(int accountId)
@@ -60,7 +71,12 @@ namespace Bookkeeper_API.Data
 
         public User GetUserById(int userId)
         {
-            throw new NotImplementedException();
+            return _db.Users.FirstOrDefault(u => u.Id == userId);
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return _db.Users.FirstOrDefault(u => u.Username == username);
         }
     }
 }

@@ -9,9 +9,9 @@
             return _roleName;
         }
 
-        public void SetRoleState(IUserRoleState roleState)
+        public void SetRoleState(User user)
         {
-            throw new NotImplementedException();
+            user.SetRole(new NewUserRoleState());
         }
     }
 }

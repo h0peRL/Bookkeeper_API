@@ -2,7 +2,7 @@
 {
     public class User
     {
-        public User(int id, string username, string passwordHash, IUserRoleState role)
+        public User(int? id, string username, string passwordHash, IUserRoleState role)
         {
             Id = id;
             Username = username;
@@ -20,7 +20,7 @@
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        public int Id { get; private set; }
+        public int? Id { get; private set; }
 
         public string Username { get; private set; }
 
@@ -30,8 +30,7 @@
 
         public void SetRole(IUserRoleState newRole)
         {
-            Role.SetRoleState(newRole);
-            // update database entry when implementing logic!
+            Role = newRole;
         }
     }
 }
