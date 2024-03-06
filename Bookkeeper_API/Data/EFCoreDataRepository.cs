@@ -43,7 +43,9 @@ namespace Bookkeeper_API.Data
 
         public void DisapproveExistingUser(User user)
         {
-            throw new NotImplementedException();
+            user.SetRole(new NewUserRoleState());
+            _db.Users.Update(user);
+            _db.SaveChanges();
         }
 
         public IEnumerable<BookingRecord> FindBookingRecordsForAccount(int accountId)
