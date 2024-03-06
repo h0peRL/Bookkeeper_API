@@ -1,4 +1,5 @@
-﻿using Bookkeeper_API.Data.DTOs;
+﻿using Bookkeeper_API.Data;
+using Bookkeeper_API.Data.DTOs;
 using Bookkeeper_API.Model.Services;
 
 namespace Bookkeeper_API.Model
@@ -8,12 +9,14 @@ namespace Bookkeeper_API.Model
         private List<Account> _accounts;
         private decimal _total;
         private int _date;
+        private IDataRepository _repository;
 
-        public BalanceSheet()
+        public BalanceSheet(IDataRepository repository)
         {
             _accounts = GetAccounts();
             _total = GetTotal();
             _date = UnixTimestampConverter.DateTimeToUnixTimestamp(DateTime.Now);
+            _repository = repository;
         }
 
         public List<Account> Accounts
@@ -47,13 +50,8 @@ namespace Bookkeeper_API.Model
         /// <returns>Returns a list of all the balance sheet accounts.</returns>
         private List<Account> GetAccounts()
         {
-            var accounts = new List<Account>();
-            foreach (var account in _accounts)
-            {
-                accounts.Add(account);
-            }
-
-            return accounts;
+            IEnumerable<Account> accounts = _repository.GetBalanceSheetAccounts();
+            return accounts.ToList();
         }
 
         /// <summary>
