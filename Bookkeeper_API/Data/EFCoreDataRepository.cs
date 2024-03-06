@@ -1,4 +1,4 @@
-using Bookkeeper_API.Model;
+﻿using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.UserManagement;
 using Bookkeeper_API.Model.UserManagement.RoleStates;
 using Microsoft.EntityFrameworkCore;
@@ -71,7 +71,12 @@ namespace Bookkeeper_API.Data
 
         public User GetUserById(int userId)
         {
-            throw new NotImplementedException();
+            return _db.Users.FirstOrDefault(u => u.Id == userId);
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return _db.Users.FirstOrDefault(u => u.Username == username);
         }
     }
 }
