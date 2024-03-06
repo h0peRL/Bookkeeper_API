@@ -1,6 +1,7 @@
 ﻿using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.AccountTypes;
 using Bookkeeper_API.Model.UserManagement;
+using Bookkeeper_API.Model.UserManagement.RoleStates;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -31,14 +32,25 @@ namespace Bookkeeper_API.Data
             modelBuilder.Entity<User>()
                 .Property(u => u.Role)
                 .HasConversion(
-                    v => JsonConvert.SerializeObject(v), // Convert IUserRoleState to JSON string
-                    v => JsonConvert.DeserializeObject<IUserRoleState>(v)); // Convert JSON string back to IUserRoleState
+                    v => v.GetRoleName(), // Convert IUserRoleState to JSON string
+                    v => DetermineRoleState(v)); // Convert JSON string back to IUserRoleState
 
             modelBuilder.Entity<BookingRecord>()
                 .Property(b => b.Amount)
                 .HasPrecision(2);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        private static IUserRoleState DetermineRoleState(string roleState)
+        {
+            // check if user is a new user
+            if (roleState == "new user")
+            {
+                return new NewUserRoleState();
+            }
+
+            return new AuthorizedUserRoleState();
         }
     }
 }

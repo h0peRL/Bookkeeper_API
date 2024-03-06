@@ -47,6 +47,14 @@ namespace Bookkeeper_API.Data
         /// <returns>User with the Id that has been passed as a parameter.</returns>
         User GetUserById(int userId);
 
+        /// <summary>
+        /// Select a user by its username.
+        /// </summary>
+        /// <param name="username">Username of the user you are looking for.</param>
+        /// <returns>User with the username that has been passed as a parameter.</returns>
+        User GetUserByUsername(string username);
+
+
         // INSERT OPERATIONS
 
         /// <summary>
@@ -72,13 +80,13 @@ namespace Bookkeeper_API.Data
         /// <summary>
         /// Authorizes newly registered users to use the system. Without this, the user won't be allowed to perform any operations.
         /// </summary>
-        /// <param name="userId">Id of the user to be authorized for use.</param>
-        void AuthorizeNewUser(int userId);
+        /// <param name="user">The user to be authorized.</param>
+        void AuthorizeNewUser(User user);
 
         /// <summary>
         /// Removes authorization from existing users.
         /// </summary>
-        /// <param name="userId">Id of the user to be disapproved.</param>
-        void DisapproveExistingUser(int userId);
+        /// <param name="user">The user to be disapproved.</param>
+        void DisapproveExistingUser(User user);
     }
 }

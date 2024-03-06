@@ -1,4 +1,4 @@
-﻿namespace Bookkeeper_API.Model.UserManagement
+namespace Bookkeeper_API.Model.UserManagement
 {
     /// <summary>
     /// Interface for roles which helps manage the user's current role.
@@ -8,8 +8,8 @@
         /// <summary>
         /// Uses state pattern to set another role.
         /// </summary>
-        /// <param name="roleState">role to set.</param>
-        public void SetRoleState(IUserRoleState roleState);
+        /// <param name="user"></param>
+        public void SetRoleState(User user);
 
         /// <summary>
         /// Gets the string name of the role object.

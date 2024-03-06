@@ -119,6 +119,9 @@ dotnet_diagnostic.CS8603.severity = silent
 # IDE0079: Remove unnecessary suppression
 dotnet_diagnostic.IDE0079.severity = silent
 
+# SA1503: Braces should not be omitted
+dotnet_diagnostic.SA1503.severity = none
+
 [*.vb]
 #### Benennungsstile ####
 
@@ -207,3 +210,6 @@ dotnet_style_qualification_for_field = false:silent
 dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_method = false:silent
 dotnet_style_qualification_for_event = false:silent
+
+# Default severity for all analyzer diagnostics
+dotnet_analyzer_diagnostic.severity = none

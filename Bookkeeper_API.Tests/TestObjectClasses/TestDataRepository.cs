@@ -51,19 +51,13 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
             users.Add(user);
         }
 
-        public void AuthorizeNewUser(int userId)
+        public void AuthorizeNewUser(User user)
         {
-            User? user = users.Find(u => u.Id == userId)
-                ?? throw new Exception($"No user with Id {userId} was found.");
-
             user.SetRole(new AuthorizedUserRoleState());
         }
 
-        public void DisapproveExistingUser(int userId)
+        public void DisapproveExistingUser(User user)
         {
-            User? user = users.Find(u => u.Id == userId)
-                ?? throw new Exception($"No user with Id {userId} was found.");
-
             user.SetRole(new NewUserRoleState());
         }
 
@@ -96,6 +90,12 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
                 ?? throw new Exception($"No user with Id {userId} was found.");
 
             return user;
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return users.Find(u => u.Username == username)
+                ?? throw new Exception($"No user with username {username} was found.");
         }
     }
 }
