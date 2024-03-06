@@ -63,3 +63,23 @@ namespace Bookkeeper_API.Controllers
             }
         }
     }
+    private string GenerateToken(User user)
+    {
+        SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+        SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
+
+        JwtSecurityToken token = new(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Audience"],
+            claims: new[]
+            {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim("UserId", user.Id.ToString() ?? string.Empty),
+                    new Claim("Role", user.Role.ToString() ?? string.Empty)
+            },
+            expires: DateTime.Now.AddHours(1),
+            signingCredentials: credentials
+        );
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+}
