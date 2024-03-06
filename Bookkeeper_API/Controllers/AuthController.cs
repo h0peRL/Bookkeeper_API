@@ -29,7 +29,19 @@ namespace Bookkeeper_API.Controllers
         [HttpPost("register")]
         public IActionResult Register(UserDto request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IUserRoleState newUserRoleState = new NewUserRoleState();
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+                User user = new(null, request.Username, hashedPassword, newUserRoleState);
+                _dataRepository.AddUser(user);
+                _dataRepository.DisapproveExistingUser(user);
+                return Ok("User created successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("login")]
