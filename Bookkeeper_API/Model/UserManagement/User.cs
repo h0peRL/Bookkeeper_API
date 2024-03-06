@@ -1,4 +1,4 @@
-namespace Bookkeeper_API.Model.UserManagement
+﻿namespace Bookkeeper_API.Model.UserManagement
 {
     public class User
     {
@@ -30,8 +30,7 @@ namespace Bookkeeper_API.Model.UserManagement
 
         public void SetRole(IUserRoleState newRole)
         {
-            Role.SetRoleState(newRole);
-            // update database entry when implementing logic!
+            Role = newRole;
         }
     }
 }
