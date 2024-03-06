@@ -1,4 +1,5 @@
 ﻿using Bookkeeper_API.Data.DTOs;
+using Bookkeeper_API.Model.Services;
 
 namespace Bookkeeper_API.Model
 {
@@ -12,9 +13,7 @@ namespace Bookkeeper_API.Model
         {
             _accounts = GetAccounts();
             _total = GetTotal();
-
-            // set today's date as timestamp
-            throw new NotImplementedException();
+            _date = UnixTimestampConverter.DateTimeToUnixTimestamp(DateTime.Now);
         }
 
         public List<Account> Accounts
@@ -38,7 +37,8 @@ namespace Bookkeeper_API.Model
         /// <returns>Returns the JSON serializable DTO of the balance sheet.</returns>
         public BalanceSheetDto StateBalance()
         {
-            return (Total, Date, Accounts);
+            BalanceSheetDto dto = BalanceSheetConverter.BalanceSheetToBalanceSheetDto(this);
+            return dto;
         }
 
         /// <summary>

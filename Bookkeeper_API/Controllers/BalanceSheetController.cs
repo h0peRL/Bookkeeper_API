@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Bookkeeper_API.Data.DTOs;
+using Bookkeeper_API.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +21,8 @@ namespace Bookkeeper_API.Controllers
         [HttpGet]
         public IActionResult GetBalanceSheet()
         {
-            throw new NotImplementedException();
+            BalanceSheetDto dto = new BalanceSheet().StateBalance();
+            return Ok(dto);
         }
     }
 }
