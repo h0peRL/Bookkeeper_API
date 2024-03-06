@@ -53,17 +53,11 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 
         public void AuthorizeNewUser(User user)
         {
-            User? user = users.Find(u => u.Id == userId)
-                ?? throw new Exception($"No user with Id {userId} was found.");
-
             user.SetRole(new AuthorizedUserRoleState());
         }
 
         public void DisapproveExistingUser(User user)
         {
-            User? user = users.Find(u => u.Id == userId)
-                ?? throw new Exception($"No user with Id {userId} was found.");
-
             user.SetRole(new NewUserRoleState());
         }
 
