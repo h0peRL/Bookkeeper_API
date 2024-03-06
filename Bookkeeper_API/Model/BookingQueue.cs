@@ -1,4 +1,4 @@
-namespace Bookkeeper_API.Model
+﻿namespace Bookkeeper_API.Model
 {
     /// <summary>
     /// This class is a singleton implementation of a regular <see cref="Queue{T}"/>.
@@ -46,6 +46,16 @@ namespace Bookkeeper_API.Model
             }
 
             return _instance;
+        }
+
+        public new virtual void Enqueue(BookingRecord item)
+        {
+            base.Enqueue(item);
+
+            if (ReferenceEquals(item, Peek()))
+            {
+                NotifyObservers();
+            }
         }
 
         public void NotifyObservers()
