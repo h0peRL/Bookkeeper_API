@@ -1,4 +1,4 @@
-using Bookkeeper_API.Data;
+﻿using Bookkeeper_API.Data;
 
 namespace Bookkeeper_API.Tests.TestObjectClasses
 {
@@ -90,6 +90,12 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
                 ?? throw new Exception($"No user with Id {userId} was found.");
 
             return user;
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return users.Find(u => u.Username == username)
+                ?? throw new Exception($"No user with username {username} was found.");
         }
     }
 }

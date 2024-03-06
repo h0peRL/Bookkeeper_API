@@ -1,4 +1,4 @@
-using Bookkeeper_API.Model;
+﻿using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.UserManagement;
 
 namespace Bookkeeper_API.Data
@@ -46,6 +46,14 @@ namespace Bookkeeper_API.Data
         /// <param name="userId">Id of the user you are looking for.</param>
         /// <returns>User with the Id that has been passed as a parameter.</returns>
         User GetUserById(int userId);
+
+        /// <summary>
+        /// Select a user by its username.
+        /// </summary>
+        /// <param name="username">Username of the user you are looking for.</param>
+        /// <returns>User with the username that has been passed as a parameter.</returns>
+        User GetUserByUsername(string username);
+
 
         // INSERT OPERATIONS
 
