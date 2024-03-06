@@ -1,4 +1,4 @@
-using Bookkeeper_API.Data;
+﻿using Bookkeeper_API.Data;
 using Bookkeeper_API.Data.DTOs;
 using Bookkeeper_API.Model.UserManagement;
 using Bookkeeper_API.Model.UserManagement.RoleStates;
@@ -62,24 +62,40 @@ namespace Bookkeeper_API.Controllers
                 return BadRequest(e.Message);
             }
         }
-    }
-    private string GenerateToken(User user)
-    {
-        SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
-        SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
-        JwtSecurityToken token = new(
-            issuer: _configuration["Jwt:Issuer"],
-            audience: _configuration["Jwt:Audience"],
-            claims: new[]
+        [HttpGet("authorize/{userId}")]
+        [Authorize]
+        public IActionResult AuthorizeUser(int userId)
+        {
+            try
             {
+                _dataRepository.AuthorizeNewUser(_dataRepository.GetUserById(userId));
+                return Ok("User authorized successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        private string GenerateToken(User user)
+        {
+            SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+            SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
+
+            JwtSecurityToken token = new(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: new[]
+                {
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim("UserId", user.Id.ToString() ?? string.Empty),
                     new Claim("Role", user.Role.ToString() ?? string.Empty)
-            },
-            expires: DateTime.Now.AddHours(1),
-            signingCredentials: credentials
-        );
-        return new JwtSecurityTokenHandler().WriteToken(token);
+                },
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials: credentials
+            );
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }
