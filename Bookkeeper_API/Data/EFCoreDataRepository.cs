@@ -24,7 +24,12 @@ namespace Bookkeeper_API.Data
 
         public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            if (_db.Users.Any(u => u.Username == user.Username))
+            {
+                throw new InvalidOperationException("User already exists");
+            }
+            _db.Users.Add(user);
+            _db.SaveChanges();
         }
 
         public void AuthorizeNewUser(User user)
