@@ -38,7 +38,7 @@ namespace Bookkeeper_API.Model
         /// <returns>Returns the JSON serializable DTO of the balance sheet.</returns>
         public BalanceSheetDto StateBalance()
         {
-            throw new NotImplementedException();
+            return (Total, Date, Accounts);
         }
 
         /// <summary>
@@ -47,7 +47,13 @@ namespace Bookkeeper_API.Model
         /// <returns>Returns a list of all the balance sheet accounts.</returns>
         private List<Account> GetAccounts()
         {
-            throw new NotImplementedException();
+            var accounts = new List<Account>();
+            foreach (var account in _accounts)
+            {
+                accounts.Add(account);
+            }
+
+            return accounts;
         }
 
         /// <summary>
@@ -56,7 +62,13 @@ namespace Bookkeeper_API.Model
         /// <returns>A decimal sum of all the account totals.</returns>
         private decimal GetTotal()
         {
-            throw new NotImplementedException();
+            decimal total = 0;
+            foreach (Account account in _accounts)
+            {
+                total += account.CalculateBalance();
+            }
+
+            return total;
         }
     }
 }
