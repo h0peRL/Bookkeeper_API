@@ -1,14 +1,24 @@
 ﻿using Bookkeeper_API.Data.DTOs;
+using Bookkeeper_API.Tests.TestObjectClasses;
 
 namespace Bookkeeper_API.Tests
 {
     public class BalanceSheetTest
     {
-        [Fact(Skip = "not implemented")]
+        private readonly TestDataRepository _repository;
+
+        public BalanceSheetTest()
+        {
+            // Setup
+            _repository = new TestDataRepository();
+            _repository.SeedAccounts();
+        }
+
+        [Fact]
         public void TestStateBalanceAccounts()
         {
             // Arrange
-            BalanceSheet balanceSheet = new();
+            BalanceSheet balanceSheet = new(_repository);
             BalanceSheetDto mockBalanceSheet = CreateMockBalanceSheet();
 
             // Act
@@ -18,11 +28,11 @@ namespace Bookkeeper_API.Tests
             Assert.Equal(mockBalanceSheet.Accounts, actualBalanceSheet.Accounts);
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void TestStateBalanceTotal()
         {
             // Arrange
-            BalanceSheet balanceSheet = new();
+            BalanceSheet balanceSheet = new(_repository);
             BalanceSheetDto mockBalanceSheet = CreateMockBalanceSheet();
 
             // Act
@@ -32,11 +42,11 @@ namespace Bookkeeper_API.Tests
             Assert.Equal(mockBalanceSheet.Total, actualBalanceSheet.Total);
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public void TestStateBalanceDate()
         {
             // Arrange
-            BalanceSheet balanceSheet = new();
+            BalanceSheet balanceSheet = new(_repository);
             BalanceSheetDto mockBalanceSheet = CreateMockBalanceSheet();
 
             // Act
