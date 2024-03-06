@@ -25,7 +25,7 @@
                 }
                 else
                 {
-                    throw new Exception("This account has does not relate to this booking record." +
+                    throw new Exception("This account has not relate to this booking record." +
                         "Something is wrong with your data repository.");
                 }
             }
