@@ -39,6 +39,8 @@ namespace Bookkeeper_API.Data
                 .Property(b => b.Amount)
                 .HasPrecision(2);
 
+            // TODO: Add configuration for Account repository
+
             base.OnModelCreating(modelBuilder);
         }
 
