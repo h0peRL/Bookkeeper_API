@@ -81,7 +81,7 @@ namespace Bookkeeper_API.Tests.TestObjectClasses
 
         public IEnumerable<Account> GetIncomeStatementAccounts()
         {
-            return accounts.FindAll(a => a.Id.ToString()[0] > 2);
+            return accounts.FindAll(a => a.Id.ToString().StartsWith('3') || a.Id.ToString().StartsWith('4'));
         }
 
         public User GetUserById(int userId)
