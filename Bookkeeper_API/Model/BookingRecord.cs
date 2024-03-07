@@ -42,7 +42,7 @@ namespace Bookkeeper_API.Model
             if (!ReferenceEquals(DebitAccount.DataRepository, CreditAccount.DataRepository))
             {
                 throw new Exception("Data repository pointers of the accounts do not match!" +
-                    "Make sure you're using the same datab repo instance on both accounts.");
+                    "Make sure you're using the same data repo instance on both accounts.");
             }
 
             IDataRepository repo = DebitAccount.DataRepository;

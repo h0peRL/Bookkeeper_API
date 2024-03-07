@@ -21,7 +21,8 @@ namespace Bookkeeper_API.Data
 
         public void AddBookingRecord(BookingRecord record)
         {
-            throw new NotImplementedException();
+            _db.Add(record);
+            _db.SaveChanges();
         }
 
         public void AddUser(User user)

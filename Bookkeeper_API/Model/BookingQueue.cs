@@ -1,13 +1,11 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Bookkeeper_API.Model
+﻿namespace Bookkeeper_API.Model
 {
     /// <summary>
     /// This class is a singleton implementation of a regular <see cref="Queue{T}"/>.
     /// The point of it is to offer a FIFO-like data structure to process booking requests in an orderly manner.
     /// This way a conflict with impossible bookings can be avoided.
     /// </summary>
-    public class BookingQueue : Queue<BookingRecord>
+    public class BookingQueue : Queue<BookingRecord>, ISubject
     {
         // To implement this class, the following sources have been used:
         // https://refactoring.guru/design-patterns/singleton/csharp/example#example-1
@@ -18,9 +16,15 @@ namespace Bookkeeper_API.Model
         // Singleton instance that gets referenced, if it has been asked for.
         private static BookingQueue? _instance;
 
+        private List<IObserver> _observers;
+
         // Constructor must be private, so only the class itself can use it.
         private BookingQueue()
         {
+            _observers = new List<IObserver>
+            {
+                new BookingProcessor()
+            };
         }
 
         /// <summary>
@@ -42,6 +46,34 @@ namespace Bookkeeper_API.Model
             }
 
             return _instance;
+        }
+
+        public new virtual void Enqueue(BookingRecord item)
+        {
+            base.Enqueue(item);
+
+            if (ReferenceEquals(item, Peek()))
+            {
+                NotifyObservers();
+            }
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IObserver observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
         }
     }
 }
