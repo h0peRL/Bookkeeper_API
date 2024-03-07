@@ -13,10 +13,10 @@ namespace Bookkeeper_API.Model
 
         public BalanceSheet(IDataRepository repository)
         {
+            _repository = repository;
             _accounts = GetAccounts();
             _total = GetTotal();
-            _date = UnixTimestampConverter.DateTimeToUnixTimestamp(DateTime.Now);
-            _repository = repository;
+            _date = UnixTimestampConverter.AnyDateTimeToUnixTimestamp(DateTime.Now);
         }
 
         public List<Account> Accounts
@@ -66,7 +66,8 @@ namespace Bookkeeper_API.Model
                 total += account.CalculateBalance();
             }
 
-            return total;
+            // The total is divided by 2 because this is a double entry bookkeeping system with active and passive accounts.
+            return total / 2;
         }
     }
 }

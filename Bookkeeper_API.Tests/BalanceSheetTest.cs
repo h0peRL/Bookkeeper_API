@@ -15,45 +15,52 @@ namespace Bookkeeper_API.Tests
         }
 
         [Fact]
-        public void TestStateBalanceAccounts()
+        public void TestAccounts()
         {
             // Arrange
             BalanceSheet balanceSheet = new(_repository);
-            BalanceSheetDto mockBalanceSheet = CreateMockBalanceSheet();
+            List<Account> expectedAccounts = _repository.GetBalanceSheetAccounts().ToList();
 
             // Act
-            BalanceSheetDto actualBalanceSheet = balanceSheet.StateBalance();
+            List<Account> actualAccounts = balanceSheet.Accounts;
 
             // Assert
-            Assert.Equal(mockBalanceSheet.Accounts, actualBalanceSheet.Accounts);
+            Assert.Equal(expectedAccounts, actualAccounts);
         }
 
         [Fact]
-        public void TestStateBalanceTotal()
+        public void TestTotal()
         {
             // Arrange
-            BalanceSheet balanceSheet = new(_repository);
-            BalanceSheetDto mockBalanceSheet = CreateMockBalanceSheet();
+            decimal expectedTotal = 400;
+
+            // Create booking record to
+            Account creditAccount = _repository.GetAccountById(2000); // VLL
+            Account debitAccount = _repository.GetAccountById(1020); // Bank
+            BookingRecord bookingRecord = new(null, null, creditAccount, debitAccount, expectedTotal);
+            bookingRecord.Execute();
 
             // Act
-            BalanceSheetDto actualBalanceSheet = balanceSheet.StateBalance();
+            BalanceSheet balanceSheet = new(_repository); // Total gets calculated on init.
+            decimal actualTotal = balanceSheet.Total;
 
             // Assert
-            Assert.Equal(mockBalanceSheet.Total, actualBalanceSheet.Total);
+            Assert.Equal(expectedTotal, actualTotal);
         }
 
         [Fact]
-        public void TestStateBalanceDate()
+        public void TestDate()
         {
             // Arrange
-            BalanceSheet balanceSheet = new(_repository);
-            BalanceSheetDto mockBalanceSheet = CreateMockBalanceSheet();
+            int nowTimestamp = (int)new DateTimeOffset(DateTime.Now.ToUniversalTime()).ToUnixTimeSeconds();
 
             // Act
-            BalanceSheetDto actualBalanceSheet = balanceSheet.StateBalance();
+            BalanceSheet balanceSheet = new(_repository);
+            int actualTimestamp = balanceSheet.Date;
 
             // Assert
-            Assert.InRange(actualBalanceSheet.Date, mockBalanceSheet.Date - 1, mockBalanceSheet.Date + 1);
+            Assert.True((actualTimestamp - nowTimestamp) < 2); // 2s of tolerance
+            Assert.True((actualTimestamp - nowTimestamp) > -2); // 2s of tolerance
         }
 
         private BalanceSheetDto CreateMockBalanceSheet()
