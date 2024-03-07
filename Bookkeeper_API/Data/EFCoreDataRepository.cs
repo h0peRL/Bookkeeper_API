@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 using Bookkeeper_API.Model;
 using Bookkeeper_API.Model.AccountTypes;
 using Bookkeeper_API.Model.UserManagement;
@@ -71,12 +71,22 @@ namespace Bookkeeper_API.Data
 
         public IEnumerable<Account> GetBalanceSheetAccounts()
         {
-            throw new NotImplementedException();
+            var activeAccounts = _db.ActiveAccounts.ToList();
+            var passiveAccounts = _db.PassiveAccounts.ToList();
+            List<Account> accounts = new List<Account>();
+            accounts.AddRange(activeAccounts);
+            accounts.AddRange(passiveAccounts);
+            return accounts;
         }
 
         public IEnumerable<Account> GetIncomeStatementAccounts()
         {
-            throw new NotImplementedException();
+            var incomeAccounts = _db.IncomeAccounts.ToList();
+            var expenseAccounts = _db.ExpenseAccounts.ToList();
+            List<Account> accounts = new List<Account>();
+            accounts.AddRange(incomeAccounts);
+            accounts.AddRange(expenseAccounts);
+            return accounts;
         }
 
         public User GetUserById(int userId)
