@@ -1,4 +1,6 @@
-﻿namespace Bookkeeper_API.Model.AccountTypes
+﻿using Bookkeeper_API.Data;
+
+namespace Bookkeeper_API.Model.AccountTypes
 {
     public class IncomeAccount : Account
     {
@@ -9,7 +11,28 @@
 
         public override decimal CalculateBalance()
         {
-            throw new NotImplementedException();
+            decimal balance = 0;
+            var bookings = DataRepository.FindBookingRecordsForAccount(Id);
+
+            foreach (var booking in bookings)
+            {
+                // check for booking type and conduct simulation
+                if (booking.DebitAccount.Id == Id)
+                {
+                    balance += booking.Amount;
+                }
+                else if (booking.CreditAccount.Id == Id)
+                {
+                    balance -= booking.Amount;
+                }
+                else
+                {
+                    throw new Exception("This account has not relate to this booking record." +
+                                        "Something is wrong with your data repository.");
+                }
+            }
+
+            return balance;
         }
 
         public override void DoDebitBooking(decimal amount)
