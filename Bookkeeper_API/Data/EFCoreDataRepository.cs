@@ -1,7 +1,10 @@
-﻿using Bookkeeper_API.Model;
+using System.Data;
+using Bookkeeper_API.Model;
+using Bookkeeper_API.Model.AccountTypes;
 using Bookkeeper_API.Model.UserManagement;
 using Bookkeeper_API.Model.UserManagement.RoleStates;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Bookkeeper_API.Data
 {
@@ -12,6 +15,13 @@ namespace Bookkeeper_API.Data
         public EFCoreDataRepository(AppDbContext dbContext)
         {
             _db = dbContext;
+
+            // check if seeding is needed
+
+            if (!_db.IncomeAccounts.Any())
+            {
+                SeedData();
+            }
         }
 
         public void AddAccount(Account account)
@@ -77,6 +87,74 @@ namespace Bookkeeper_API.Data
         public User GetUserByUsername(string username)
         {
             return _db.Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        private void SeedData()
+        {
+            DataSet set = new DataSet();
+            SeedAccounts();
+        }
+
+        private void SeedAccounts()
+        {
+            using IDbContextTransaction transaction = _db.Database.BeginTransaction();
+            Dictionary<int, string> dictionary = ImportAccountsFromCSV();
+
+            foreach (KeyValuePair<int, string> kvp in dictionary)
+            {
+
+                switch (kvp.Key)
+                {
+                    case >= 3000 and <= 3999:
+                        _db.IncomeAccounts.Add(new IncomeAccount(kvp.Key, kvp.Value)
+                        {
+                            DataRepository = this
+                        });
+                        break;
+                    case >= 4000 and <= 4999:
+                        _db.ExpenseAccounts.Add(new ExpenseAccount(kvp.Key, kvp.Value)
+                        {
+                            DataRepository = this
+                        });
+                        break;
+                }
+            }
+            // got the idea for this fix from https://stackoverflow.com/questions/40896047/how-to-turn-on-identity-insert-in-net-core
+            _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Account ON");
+            _db.SaveChanges();
+            _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Account OFF");
+            transaction.Commit();
+        }
+
+        private static Dictionary<int, string> ImportAccountsFromCSV()
+        {
+            string path = @"./account_chart.csv";
+            Dictionary<int, string> accountValues = new();
+
+            using var reader = new StreamReader(path);
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine()
+                              ?? throw new Exception("Reading null line from CSV-File.");
+                string[] values = line.Split(";");
+
+                if (values.Length != 2)
+                {
+                    throw new Exception("Line didn't contain at least 2 values.");
+                }
+
+                _ = int.TryParse(values[0], out int id);
+                string name = values[1];
+
+                if (accountValues.ContainsKey(id))
+                {
+                    throw new Exception($"Account with Id {id} already exists in dictionary!");
+                }
+
+                accountValues.Add(id, name);
+            }
+
+            return accountValues;
         }
     }
 }

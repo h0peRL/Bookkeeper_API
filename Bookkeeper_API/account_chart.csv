@@ -1,0 +1,121 @@
+﻿1000;Cash on hand
+1020;Cash at bank (incl. Postfinance)
+1045;Credit cards / debit cards
+1060;Current assets with a stock exchange price
+1069;Securities (with stock exchange price)
+1100;Trade receivables / Accounts receivable
+1109;Trade receivables / Accounts receivable
+1140;Other current receivables
+1149;Advances and loans
+1170;Accumulated value adjustments on advances and loans
+1171;Input Tax VAT on cost of materials, goods, services, energy
+1176;Input Tax VAT on investments and other operating costs
+1179;Withholding tax receivable
+1180;Tax at source on wages and salaries receivable / Withholding tax on …
+1190;Receivables from social security and pension funds
+1199;Other current receivables
+1200;Inventories and non-invoiced services
+1250;Inventories
+1260;Goods in consignment
+1270;Finished goods
+1280;Unfinished goods
+1300;Accrued income and prepaid expenses
+1400;Securities
+1409;Accumulated value adjustment on securities
+1440;Loans
+1441;Mortgages
+1449;Accumulated value adjustment on loans and mortgages
+1480;Shareholdings
+1489;Accumulated value adjustments on shareholdings
+1500;Machinery
+1509;Accumulated depreciation and value adjustments on machinery
+1510;Equipment and facilities
+1519;Accumulated depreciation and value adjustments on equipment and facilities
+1520;Office equipment (incl. ICT)
+1529;Accumulated depreciation and value adjustemnts on office equipment (incl. ICT)
+1530;Vehicles
+1539;Accumulated depreciation and value adjustments on vehicles
+1590;Other movable tangible assets
+1599;Accumulated depreciation and value adjustments on other movable tangible assets
+1600;Land and buildings
+1609;Accumulated depreciation and value adjustments on land and buildings
+1700;Patents, know-how, licences, trademarks, rights, development costs
+1709;Accumulated depreciation and value adjustments on patents, knowhow, licences, trademarks, development costs
+1770;Goodwill
+1779;Accumulated depreciation and value adjustments on goodwill
+1850;Non-paid up basic, shareholder or foundation capital
+2000;Trade creditors / Accounts payable
+2030;Prepayments received
+2100;Bank borrowings and overdrafts
+2120;Liabilities from finance leasing transactions
+2140;Other current interest-bearing liabilities
+2200;VAT owed
+2201;VAT according to VAT report
+2206;Withholding tax owed
+2208;Direct taxes
+2209;Tax at source on wages and salaries owed / Withholding tax on …
+2210;Other current liabilites (non-interest-bearing)
+2269;Dividends payable
+2270;Social security and pension funds owed
+2300;Deferred income and accrued expenses
+2330;Short-term provisions
+2400;Bank borrowings and overdrafts
+2420;Liabilities from finance leasing transactions
+2430;Debentures
+2450;Loans
+2451;Mortgages
+2500;Other long-term liabilities (non-interest bearing)
+2600;Long-term provisions
+2800;Basic, shareholder or foundation capital
+2900;Statutory capital reserve
+2950;Statutory retained earnings
+2955;Revaluation reserve
+2960;Voluntary retained earnings
+2965;Own capital shares as negative items
+2970;Profit carried forward or loss carried forward as negative item
+2979;Annual profit or loss as negative items
+3000;Revenues from sales of products (manufacturing)
+3200;Revenues from sales of goods (trade)
+3400;Revenues from services
+3600;Other operating income
+3700;internal production of tangible fixed assets
+3710;Internal consumption
+3800;Reduction in revenues
+3805;Losses from bad debts, changes in value adjustments on trade receivables
+3809;VAT net tax rate
+3860;Changes in warranty provision
+3900;Changes of inventories of finished goods
+3901;Changes of inventories of unfinished goods
+3940;Changes of inventories of non-invoiced services
+4000;Cost of raw materials (manufacturing)
+4200;Cost of materials (trade)
+4400;Cost of purchased services
+4500;Energy costs for the production
+5000;Wages and salaries
+5700;Social securities and pension funds expenses
+5800;Other staff expense
+5900;Purchased services expense
+6000;Rent and associated expenses
+6100;Maintenance and repair expenses, replacement of movable tangible assets
+6105;Leasing expense for movable tangible assets
+6200;Vehicle and transportation expenses
+6260;Leasing expense and rental of vehicles
+6300;Insurance expense
+6400;Energy and disposal expenses
+6500;Administrative expense
+6570;IT and computing expenses, including leasing
+6600;Advertising expense
+6700;Other operational expense
+6800;Depreciation and value adjustments on capital assets items
+6900;Financial expense
+6950;Financial income
+7000;Non-core business revenues
+7010;Non-core business expenses
+7500;Revenues from operational real estate
+7510;Expenses from operational real estate
+8000;Non-operational expense
+8100;Non-operational income
+8500;Extraordinary, non-recurring or prior-period expense
+8510;Extraordinary, non-recurring or prior-period income
+8900;Direct taxes
+9200;Annual profit or annual loss
