@@ -30,7 +30,7 @@ namespace Bookkeeper_API.Model
         public string AccountName { get; private set; }
 
         [NotMapped]
-        required public IDataRepository DataRepository { get; init; }
+        public required IDataRepository DataRepository { get; init; }
 
         public abstract decimal CalculateBalance();
 
