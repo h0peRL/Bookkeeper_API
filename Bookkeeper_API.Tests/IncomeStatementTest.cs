@@ -1,28 +1,38 @@
 ﻿using Bookkeeper_API.Data.DTOs;
+using Bookkeeper_API.Tests.TestObjectClasses;
 
 namespace Bookkeeper_API.Tests
 {
     public class IncomeStatementTest
     {
+        private readonly TestDataRepository _repository;
+
+        public IncomeStatementTest()
+        {
+            // Setup
+            _repository = new TestDataRepository();
+            _repository.SeedAccounts();
+        }
+
         [Fact(Skip = "not implemented")]
-        public void TestStateIncomeAccounts()
+        public void TestAccounts()
         {
             // Arrange
-            IncomeSatetement incomeStatement = new();
-            IncomeStatementDto mockIncomeStatement = CreateMockIncomeStatement();
+            IncomeStatement incomeStatement = new(_repository);
+            List<Account> expectedAccounts = _repository.GetIncomeStatementAccounts().ToList();
 
             // Act
-            IncomeStatementDto actualIncomeStatement = incomeStatement.StateIncome();
+            List<Account> actualAccounts = incomeStatement.Accounts;
 
             // Assert
-            Assert.Equal(mockIncomeStatement.Accounts, actualIncomeStatement.Accounts);
+            Assert.Equal(expectedAccounts, actualAccounts);
         }
 
         [Fact(Skip = "not implemented")]
         public void TestStateIncomeTotal()
         {
             // Arrange
-            IncomeSatetement incomeStatement = new();
+            IncomeStatement incomeStatement = new(_repository);
             IncomeStatementDto mockIncomeStatement = CreateMockIncomeStatement();
 
             // Act
@@ -36,7 +46,7 @@ namespace Bookkeeper_API.Tests
         public void TestStateIncomeDate()
         {
             // Arrange
-            IncomeSatetement incomeStatement = new();
+            IncomeStatement incomeStatement = new(_repository);
             IncomeStatementDto mockIncomeStatement = CreateMockIncomeStatement();
 
             // Act
@@ -50,7 +60,7 @@ namespace Bookkeeper_API.Tests
         public void TestStateIncomeResult()
         {
             // Arrange
-            IncomeSatetement incomeStatement = new();
+            IncomeStatement incomeStatement = new(_repository);
             IncomeStatementDto mockIncomeStatement = CreateMockIncomeStatement();
 
             // Act
@@ -64,7 +74,7 @@ namespace Bookkeeper_API.Tests
         public void TestStateIncomeIsLoss()
         {
             // Arrange
-            IncomeSatetement incomeStatement = new();
+            IncomeStatement incomeStatement = new(_repository);
             IncomeStatementDto mockIncomeStatement = CreateMockIncomeStatement();
 
             // Act
@@ -80,8 +90,8 @@ namespace Bookkeeper_API.Tests
             {
                 Accounts = new Dictionary<(int, string), decimal>
                 {
-                    { (4200, "Merchandise expense"), 200 },
-                    { (3200, "Trading revenue"), 400 }
+                    { (4200, "Cost of materials (trade)"), 200 },
+                    { (3200, "Revenues from sales of goods (trade)"), 400 }
                 },
                 Total = 400,
                 Date = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
