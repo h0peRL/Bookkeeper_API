@@ -1,4 +1,6 @@
-﻿using Bookkeeper_API.Data.DTOs;
+﻿using Bookkeeper_API.Data;
+using Bookkeeper_API.Data.DTOs;
+using Bookkeeper_API.Model.Services;
 
 namespace Bookkeeper_API.Model
 {
@@ -7,14 +9,14 @@ namespace Bookkeeper_API.Model
         private List<Account> _accounts;
         private decimal _total;
         private int _date;
+        private IDataRepository _repository;
 
-        public BalanceSheet()
+        public BalanceSheet(IDataRepository repository)
         {
+            _repository = repository;
             _accounts = GetAccounts();
             _total = GetTotal();
-
-            // set today's date as timestamp
-            throw new NotImplementedException();
+            _date = UnixTimestampConverter.AnyDateTimeToUnixTimestamp(DateTime.Now);
         }
 
         public List<Account> Accounts
@@ -38,7 +40,8 @@ namespace Bookkeeper_API.Model
         /// <returns>Returns the JSON serializable DTO of the balance sheet.</returns>
         public BalanceSheetDto StateBalance()
         {
-            throw new NotImplementedException();
+            BalanceSheetDto dto = BalanceSheetConverter.BalanceSheetToBalanceSheetDto(this);
+            return dto;
         }
 
         /// <summary>
@@ -47,7 +50,8 @@ namespace Bookkeeper_API.Model
         /// <returns>Returns a list of all the balance sheet accounts.</returns>
         private List<Account> GetAccounts()
         {
-            throw new NotImplementedException();
+            IEnumerable<Account> accounts = _repository.GetBalanceSheetAccounts();
+            return accounts.ToList();
         }
 
         /// <summary>
@@ -56,7 +60,14 @@ namespace Bookkeeper_API.Model
         /// <returns>A decimal sum of all the account totals.</returns>
         private decimal GetTotal()
         {
-            throw new NotImplementedException();
+            decimal total = 0;
+            foreach (Account account in _accounts)
+            {
+                total += account.CalculateBalance();
+            }
+
+            // The total is divided by 2 because this is a double entry bookkeeping system with active and passive accounts.
+            return total / 2;
         }
     }
 }

@@ -1,20 +1,31 @@
-﻿using Bookkeeper_API.Tests.TestObjectClasses;
+using Bookkeeper_API.Tests.TestObjectClasses;
 
 namespace Bookkeeper_API.Tests.AccountTests
 {
     public class ActiveAccountTest
     {
-        [Fact(Skip = "not implemented")]
+        private readonly TestDataRepository _repository;
+
+        public ActiveAccountTest()
+        {
+            // Setup
+            _repository = new TestDataRepository();
+            _repository.SeedAccounts();
+        }
+
+        [Fact]
         public void TestCalculateBalance()
         {
             // Arrange
-            ActiveAccount activeAccount = new(1020, "Bank")
-            {
-                DataRepository = new TestDataRepository()
-            };
+            Account account = _repository.GetAccountById(1020);
 
             // Act
-            decimal balance = activeAccount.CalculateBalance();
+            if (account.GetType() != typeof(ActiveAccount))
+            {
+                throw new Exception("The received account is not of the right type.");
+            }
+
+            decimal balance = account.CalculateBalance();
 
             // Assert
             Assert.Equal(0, balance);
